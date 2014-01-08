@@ -26,7 +26,7 @@ def create_link(post_id):
 def main():
     local_tz = time.timezone / (60 * 60)
     current_hour = datetime.now().hour + (7 + local_tz)  # to GMT +7
-    if current_hour < 24:
+    if current_hour < 5:
         print 'too late to tweet'
         exit()
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
