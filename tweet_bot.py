@@ -8,6 +8,8 @@ import tweepy
 import constants
 from db_conn import DBConn
 from random import randint
+from datetime import datetime
+import time
 
 # constants
 consumer_key = constants.consumer_key
@@ -22,29 +24,31 @@ def create_link(post_id):
 
 
 def main():
+    local_tz = time.timezone / (60 * 60)
+    current_hour = datetime.now().hour + (7 + local_tz)  # to GMT +7
+    if current_hour < 24:
+        print 'too late to tweet'
+        exit()
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_key, access_secret)
     api = tweepy.API(auth)
 
-    # api.update_status('Sedang gundah apa hari ini?')
-
-    data = DBConn()
+    dbconn = DBConn()
     post_table = 'qa_posts'
     post_id_column = 'postid'
     title_column = 'title'
     num_post = 10
-    # tables = data.read('SHOW TABLES')
-    # columns_post = data.read('SHOW COLUMNS FROM ' + post_table)
-    # for i in columns_post:
-    #     print i
-    query = 'SELECT ' + post_id_column + ', ' + title_column + ' FROM ' + post_table + ' WHERE ' + \
-            title_column + ' is not null ORDER BY ' + post_id_column + ' DESC LIMIT ' + str(num_post)
+
+    query = 'SELECT ' + post_id_column + ', ' + title_column + ' FROM ' + \
+            post_table + ' WHERE ' + title_column + ' is not null ORDER BY ' + \
+            post_id_column + ' DESC LIMIT ' + str(num_post)
     print query
-    a = data.read(query)
+    a = dbconn.read(query)
     print len(a)
     rand_number = randint(0, num_post)
 
-    api.update_status(str(a[rand_number][1]) + ' baca di ' + create_link(a[rand_number][0]))
+    api.update_status(str(a[rand_number][1]) + ' Silahkan baca di ' +
+                      create_link(a[rand_number][0]))
 
 if __name__ == '__main__':
     main()
