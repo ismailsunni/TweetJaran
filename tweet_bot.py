@@ -9,17 +9,17 @@ import constants
 from db_conn import DBConn
 from random import randint
 
-# constant
+# constants
 consumer_key = constants.consumer_key
 consumer_secret = constants.consumer_secret
 access_key = constants.access_key
 access_secret = constants.access_secret
 
 
-
-def create_link(id):
+def create_link(post_id):
     prev_string = 'http://sarapanhati.com/qa/?qa='
-    return  prev_string + str(id)
+    return prev_string + str(post_id)
+
 
 def main():
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
