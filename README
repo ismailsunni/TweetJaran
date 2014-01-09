@@ -1,8 +1,0 @@
-TweetJaran
-=========
-
-TweetBot
--------
-For tweeting content every specific time.
-
-cronjob: 0,30 * * * * ~/dev/python/TweetJaran/gembus.sh
