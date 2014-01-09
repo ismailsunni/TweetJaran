@@ -34,7 +34,7 @@ def main():
     api = setup_api(consumer_key, consumer_secret, access_key, access_secret)
 
     # get followers
-    followers = api.followers('santapanhaticom')
+    followers = api.followers()
     print len(followers)
     for follower in followers:
         if is_good_account(follower):
