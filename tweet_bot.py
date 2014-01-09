@@ -25,8 +25,8 @@ def create_link(post_id):
 
 def main():
     local_tz = time.timezone / (60 * 60)
-    current_hour = datetime.now().hour + (7 + local_tz)  # to GMT +7
-    if current_hour < 5:
+    current_hour = (datetime.now().hour + (7 + local_tz)) % 24  # to GMT +7
+    if 0 < current_hour < 5:
         print 'too late to tweet'
         exit()
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -42,12 +42,10 @@ def main():
     query = 'SELECT ' + post_id_column + ', ' + title_column + ' FROM ' + \
             post_table + ' WHERE ' + title_column + ' is not null ORDER BY ' + \
             post_id_column + ' DESC LIMIT ' + str(num_post)
-    print query
     a = dbconn.read(query)
-    print len(a)
     rand_number = randint(0, num_post)
 
-    api.update_status(str(a[rand_number][1]) + ' Silahkan baca di ' +
+    api.update_status(str(a[rand_number][1]) + ' | Silahkan baca di ' +
                       create_link(a[rand_number][0]))
 
 if __name__ == '__main__':
