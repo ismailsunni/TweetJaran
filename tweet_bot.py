@@ -10,6 +10,7 @@ from db_conn import DBConn
 from random import randint
 from datetime import datetime
 import time
+from util import  setup_api
 
 # constants
 consumer_key = constants.consumer_key
@@ -28,10 +29,8 @@ def main():
     current_hour = (datetime.now().hour + (7 + local_tz)) % 24  # to GMT +7
     if 0 < current_hour < 5:
         print 'too late to tweet'
-        exit()
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_key, access_secret)
-    api = tweepy.API(auth)
+        return
+    api = setup_api(consumer_key, consumer_secret, access_key, access_secret)
 
     dbconn = DBConn()
     post_table = 'qa_posts'
