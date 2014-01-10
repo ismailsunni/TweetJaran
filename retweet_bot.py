@@ -8,7 +8,7 @@ __copyright__ = 'imajimatika@gmail.com'
 __doc__ = ''
 
 import constants
-from util import setup_api, is_good_account
+from util import setup_api, is_good_account, read_list
 
 # constants
 consumer_key = constants.consumer_key
@@ -33,16 +33,33 @@ def retweet(follower):
     pass
 
 
+def reply(api, tweet_text, target_user, target_tweet=None):
+    """
+    Reply a target_tweet from a target_user
+    """
+    full_tweet = '@' + target_user.screen_name + ' ' + tweet_text
+    if target_tweet is not None:
+        target_tweet_id = target_tweet.id_str
+    else:
+        target_tweet_id = target_user.status.id_str
+
+    api.update_status(full_tweet, target_tweet_id)
+
+
 def main():
     api = setup_api(consumer_key, consumer_secret, access_key, access_secret)
 
+    file_path = 'tweets.txt'
+    tweet_data = read_list(file_path)
     # get followers
     followers = api.followers()
-    print len(followers)
     for follower in followers:
         if is_good_account(follower):
             print follower.name
-            retweet(follower)
+            reply(follower)
+    followers = api.followers()
+    follower = followers[0]
+    reply(api, 'Jangan menyerah... ', follower)
 
 if __name__ == '__main__':
     main()

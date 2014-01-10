@@ -10,6 +10,13 @@ __doc__ = ''
 from datetime import datetime, timedelta
 import tweepy
 
+# constants
+import constants
+consumer_key = constants.consumer_key
+consumer_secret = constants.consumer_secret
+access_key = constants.access_key
+access_secret = constants.access_secret
+
 
 def read_list(file_path):
     """Read a file and create a list contain each line
@@ -63,12 +70,15 @@ def setup_api(consumer_key, consumer_secret, access_key, access_secret):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_key, access_secret)
     api = tweepy.API(auth)
+    # api.retweet('421542742167007233')
     return api
 
 
 if __name__ == '__main__':
-    a = 'famous_accounts.txt'
-    c = read_list(a)
-    print type(c)
-    for d in c:
-        print d, '++++++++++'
+    # a = 'famous_accounts.txt'
+    # c = read_list(a)
+    # print type(c)
+    # for d in c:
+    #     print d, '++++++++++'
+    api = setup_api(consumer_key, consumer_secret, access_key, access_secret)
+    api.update_status('@TVSeriesUpdate telo goreng', '421542742167007233')
