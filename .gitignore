@@ -1,7 +1,9 @@
 .idea
 *.pyc
+*.txt~
 constants.py
 famous_accounts.txt
+tweets.txt
 *.py[cod]
 
 # C extensions
