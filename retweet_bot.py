@@ -53,13 +53,15 @@ def main():
     tweet_data = read_list(file_path)
     # get followers
     followers = api.followers()
-    for follower in followers:
-        if is_good_account(follower):
-            print follower.name
-            reply(follower)
-    followers = api.followers()
-    follower = followers[0]
-    reply(api, 'Jangan menyerah... ', follower)
+    # for follower in followers:
+    #     if is_good_account(follower):
+    #         print follower.name
+    #         reply(follower)
+    friends = api.friends()
+    print friends[0].name, friends[0].following
+    print followers[0].name, followers[0].following
+    # reply(api, 'Jangan menyerah... ', follower)
+    print api.lookup_friendships('ismailsunni', 'rahard')[0]
 
 if __name__ == '__main__':
     main()
