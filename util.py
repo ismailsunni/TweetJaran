@@ -10,6 +10,20 @@ __doc__ = ''
 from datetime import datetime, timedelta
 import tweepy
 
+
+def read_list(file_path):
+    """Read a file and create a list contain each line
+    """
+    with open(file_path) as f:
+        data = f.read()
+    data = data.split('\n')
+    retval = []
+    for datum in data:
+        if datum != '':
+            retval.append(datum)
+    return retval
+
+
 def is_up2date(last_date, delta_hour=36):
     """
     Return true if last_date is no more than delta_hour. delta_hour is in hour
@@ -19,6 +33,7 @@ def is_up2date(last_date, delta_hour=36):
     if now - last_date < delta_hour:
         return True
     return False
+
 
 def is_good_account(user):
     """
@@ -40,6 +55,7 @@ def is_good_account(user):
     else:
         return False
 
+
 def setup_api(consumer_key, consumer_secret, access_key, access_secret):
     """
     setup api
@@ -48,3 +64,11 @@ def setup_api(consumer_key, consumer_secret, access_key, access_secret):
     auth.set_access_token(access_key, access_secret)
     api = tweepy.API(auth)
     return api
+
+
+if __name__ == '__main__':
+    a = 'famous_accounts.txt'
+    c = read_list(a)
+    print type(c)
+    for d in c:
+        print d, '++++++++++'

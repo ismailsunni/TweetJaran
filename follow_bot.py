@@ -6,7 +6,7 @@ __author__ = '@ismailsunni'
 import tweepy
 import constants
 from datetime import datetime
-from util import is_up2date, is_good_account, setup_api
+from util import is_up2date, is_good_account, setup_api, read_list
 
 # constants
 consumer_key = constants.consumer_key
@@ -22,11 +22,8 @@ def test():
 
 def main():
     api = setup_api(consumer_key, consumer_secret, access_key, access_secret)
-    accounts = ['SMASHindonesia',
-                'Poconggg',
-                'coboyjr',
-                'JKT48FC',
-                'EtudeHouseIndo']
+    file_path = 'famous_accounts.txt'
+    accounts = read_list(file_path)
     for account in accounts:
         print '### From follower of ', account
         try:
