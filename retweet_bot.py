@@ -16,6 +16,7 @@ consumer_secret = constants.consumer_secret
 access_key = constants.access_key
 access_secret = constants.access_secret
 
+
 def is_good_status(follower):
     """
     Check if the last status is good
@@ -27,8 +28,10 @@ def is_good_status(follower):
         return False
     return False
 
+
 def retweet(follower):
     pass
+
 
 def main():
     api = setup_api(consumer_key, consumer_secret, access_key, access_secret)

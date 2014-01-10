@@ -5,7 +5,7 @@ __author__ = '@ismailsunni'
 
 import tweepy
 import constants
-from datetime import timedelta, datetime
+from datetime import datetime
 from util import is_up2date, is_good_account, setup_api
 
 # constants

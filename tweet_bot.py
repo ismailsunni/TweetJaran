@@ -3,14 +3,12 @@
 __date__ = '08/01/2014'
 __author__ = '@ismailsunni'
 
-
-import tweepy
 import constants
 from db_conn import DBConn
 from random import randint
 from datetime import datetime
 import time
-from util import  setup_api
+from util import setup_api
 
 # constants
 consumer_key = constants.consumer_key
