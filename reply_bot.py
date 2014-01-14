@@ -1,4 +1,4 @@
-"""Retweet some followers/friends' tweets
+"""Reply some followers/friends' tweets
 """
 __author__ = '@ismailsunni'
 __project_name = 'TweetJaran'
@@ -48,7 +48,7 @@ def main():
     file_path = 'tweets.txt'
     tweet_data = read_list(file_path)
     tweet_text = pick_random_element(tweet_data)
-    # get followers
+    # get target
     target_accounts = api.friends()
     done = False
     while not done:
