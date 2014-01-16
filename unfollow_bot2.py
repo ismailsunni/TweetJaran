@@ -1,0 +1,6 @@
+__author__ = 'ismailsunni'
+__project_name = 'TweetJaran'
+__filename = 'unfollow_bot2'
+__date__ = '1/16/14'
+__copyright__ = 'imajimatika@gmail.com'
+__doc__ = ''

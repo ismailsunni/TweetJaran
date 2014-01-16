@@ -65,6 +65,7 @@ def main():
     except TweepError, e:
         print e
         d = api.rate_limit_status()
+        print d
         for i,j in d['resources']['friends'].iteritems():
             print i, j
             print(datetime.fromtimestamp(int(j['reset'])).strftime('%Y-%m-%d %H:%M:%S'))
