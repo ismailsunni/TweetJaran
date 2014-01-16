@@ -51,17 +51,19 @@ def main():
             print 'page: ', i
             print len(page)
             i += 1
-            while len(page) > 0:
-                friend = page.pop()
-                if need_unfollow(api, friend):
-                    print friend.name, ' has been unfollowed'
-                    unfollow(api, friend)
-                    unfollow_counter += 1
-                else:
-                    print 'keep following ', friend.name
-                    keep_follow_counter += 1
+            # while len(page) > 0:
+            #     friend = page.pop()
+            #     if need_unfollow(api, friend):
+            #         print friend.name, ' has been unfollowed'
+            #         unfollow(api, friend)
+            #         unfollow_counter += 1
+            #     else:
+            #         print 'keep following ', friend.name
+            #         keep_follow_counter += 1
             friends.extend(page)
             time.sleep(60)
+            print len(friends), i - 1
+        print len(friends)
     except TweepError, e:
         print e
         d = api.rate_limit_status()
