@@ -77,5 +77,24 @@ def main():
         print 'keep following ', keep_follow_counter, ' good accounts'
         print 'total: ', unfollow_counter + keep_follow_counter
 
+
+def main_unfollow_all():
+    api = setup_api(consumer_key, consumer_secret, access_key, access_secret)
+    i = 0
+    try:
+        for page in Cursor(api.friends).pages():
+            print 'page:', i
+            i += 1
+            for friend in page:
+                try:
+                    unfollow(api, friend)
+                    print 'Unfollow', friend.screen_name
+                except TweepError, e:
+                    print 'Cannot unfollow', friend.screen_name, e
+            time.sleep(60)
+    except TweepError, e:
+        print e
+
 if __name__ == '__main__':
-    main()
+    # main()
+    main_unfollow_all()
